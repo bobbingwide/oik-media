@@ -27,7 +27,25 @@ License: GPL2
 
 */
 
-oik_media_plugin_loaded();  
+oik_media_plugin_loaded(); 
+
+/**
+ * Perform initialisation when plugin file loaded 
+ *
+ * This plugin doesn't really need to do anything until someone requests a "media" field to be formatted
+ * BUT at present there isn't an action to respond to **?** 2013/07/02
+ * 
+ */
+function oik_media_plugin_loaded() {
+	add_action( "oik_pre_theme_field", "oik_media_pre_theme_field" );
+	add_action( "oik_pre_form_field", "oik_media_pre_form_field" );
+	//add_filter( "bw_field_validation_date", "oik_media_field_validation_date", 10, 3 );
+	add_filter( "oik_query_field_types", "oik_media_query_field_types" );
+	//add_filter( "oik_default_meta_value_date", "oik_media_default_meta_value_date", 10, 2 );
+	add_action( "oik_loaded", "oik_media_oik_loaded" );
+	add_filter( "bw_form_function", "oik_media_bw_form_functions" );
+}
+
 
 /**
  * Implements action "oik_pre_theme_field"
@@ -36,7 +54,7 @@ oik_media_plugin_loaded();
  *
  */
 function oik_media_pre_theme_field() {
-  oik_require( "includes/oik-media.inc", "oik-media" );
+	oik_require( "includes/oik-media.inc", "oik-media" );
 } 
 
 /**
@@ -46,7 +64,7 @@ function oik_media_pre_theme_field() {
  *
  */
 function oik_media_pre_form_field() {
-  oik_require( "includes/oik-media.inc", "oik-media" );
+	oik_require( "includes/oik-media.inc", "oik-media" );
 } 
 
 /**
@@ -58,16 +76,16 @@ function oik_media_pre_form_field() {
  * @param array $data - array of data about the field   
  */
 function oik_media_field_validation_date( $value, $field, $data ) {
-  // bw_trace2();
-  if ( $value ) {
-    $preg_match = preg_match( '!\d{4}-\d{2}-\d{2}!', $value );
-    //$numeric = is_numeric( $value );
-    if ( !$preg_match ) {
-      $text = sprintf( __( "Invalid %s" ), $data['#title'] );     
-      bw_issue_message( $field, "non_numeric", $text, "error" );
-    }
-  }       
-  return( $value );   
+	// bw_trace2();
+	if ( $value ) {
+		$preg_match = preg_match( '!\d{4}-\d{2}-\d{2}!', $value );
+		//$numeric = is_numeric( $value );
+		if ( !$preg_match ) {
+			$text = sprintf( __( "Invalid %s" ), $data['#title'] );     
+		 bw_issue_message( $field, "non_numeric", $text, "error" );
+		}
+	}       
+	return( $value );   
 }
 
 /**
@@ -81,11 +99,10 @@ function oik_media_field_validation_date( $value, $field, $data ) {
  * 
  */
 function oik_media_query_field_types( $field_types ) {
-  $field_types['media'] = __( "Media", 'oik-media' ); 
-	
-  //$field_types['file'] = __( "File", 'oik-media' ); 
-  //$field_types['image'] = __( "Image", 'oik-media' ); 
-  return( $field_types );
+	$field_types['media'] = __( "Media", 'oik-media' ); 
+	//$field_types['file'] = __( "File", 'oik-media' ); 
+	//$field_types['image'] = __( "Image", 'oik-media' ); 
+	return( $field_types );
 }
 
 
@@ -94,22 +111,5 @@ function oik_media_query_field_types( $field_types ) {
  *
  */
 function oik_media_oik_loaded() {
-  //bw_add_shortcode( "bw_otd", "bw_otd", oik_path( "shortcodes/oik-otd.php", "oik-media" ), false );
+	//bw_add_shortcode( "bw_otd", "bw_otd", oik_path( "shortcodes/oik-otd.php", "oik-media" ), false );
 }  
- 
-/**
- * Perform initialisation when plugin file loaded 
- *
- * This plugin doesn't really need to do anything until someone requests a "media" field to be formatted
- * BUT at present there isn't an action to respond to **?** 2013/07/02
- * 
- */
-function oik_media_plugin_loaded() {
-  add_action( "oik_pre_theme_field", "oik_media_pre_theme_field" );
-  add_action( "oik_pre_form_field", "oik_media_pre_form_field" );
-  //add_filter( "bw_field_validation_date", "oik_media_field_validation_date", 10, 3 );
-  add_filter( "oik_query_field_types", "oik_media_query_field_types" );
-  //add_filter( "oik_default_meta_value_date", "oik_media_default_meta_value_date", 10, 2 );
-  add_action( "oik_loaded", "oik_media_oik_loaded" );
-}
-
