@@ -79,6 +79,8 @@ function bw_theme_field_media( $key, $value, $field=null ) {
  */
 function oik_media_upload_form( $name, $value=null ) {
 	e( "oik-media upload form for $name" );
+	oik_require( "includes/oik-media-upload-form.php", "oik-media" );
+	oik_media_lazy_upload_form( $name, $value );
 }
 
 /**
