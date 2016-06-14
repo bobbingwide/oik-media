@@ -5,14 +5,40 @@
  *
  * Note: when the form includes file upload the form tag needs enctype="multipart/form-data"
  *
- * '<input type="file" value="" name=files[] id=$name multiple="multiple"';
+ * '<input type="file" value="" name=files id=$name multiple="multiple"';
+ *
+ * What you actually receive depends on the input tag used
+ * 
+ * Field name | Multiple | $_FILES becomes
+ * ---------- | -------- | --------------------
+ * file    	  | No       | Simple array - see below
+ * files[]    | No       | Multiple files array format - see below
+ * file	      | Yes      | Simply array - only the last file selected - so don't use this method!
+ * files[]  	| Yes      | Multiple files array 
+ 
+ * Simple array:
+ * `
+ * [name] => IMG_0005.JPG
+   [type] => image/jpeg
+   [tmp_name] => C:\Windows\Temp\php76C9.tmp
+   [error] => 0
+   [size] => 701145
+ * `
+ *
+ * Multiple files array: see 
+ 
+ * 
+ * @param string $abbrev - the format type required "I" or "M"
+ * @param array $fields
+ *
  */
-
-function oik_media_lazy_upload_form( $name, $value ) {
-
+function oik_media_lazy_upload_form( $abbrev, $fields ) {
+	bw_trace2();
+	bw_backtrace();
 	$args = array( "#type" => "file" );
-
-	bw_textfield( $name, null, null, $value, null, null, $args );	
+	$multiple = kv( "multiple", "multiple" );
+	$multiple = null;
+	bw_textfield( "file", null, "File", null, null, $multiple, $args );	
 	
 }
 
