@@ -32,8 +32,6 @@ oik_media_plugin_loaded();
 /**
  * Perform initialisation when plugin file loaded 
  *
- * This plugin doesn't really need to do anything until someone requests a "media" field to be formatted
- * BUT at present there isn't an action to respond to **?** 2013/07/02
  * 
  */
 function oik_media_plugin_loaded() {
@@ -43,7 +41,8 @@ function oik_media_plugin_loaded() {
 	add_filter( "oik_query_field_types", "oik_media_query_field_types" );
 	//add_filter( "oik_default_meta_value_date", "oik_media_default_meta_value_date", 10, 2 );
 	add_action( "oik_loaded", "oik_media_oik_loaded" );
-	add_filter( "bw_form_function", "oik_media_bw_form_functions" );
+	add_filter( "bw_form_functions", "oik_media_bw_form_functions" );
+	add_filter( "bw_validate_functions", "oik_media_bw_validate_functions" );
 }
 
 
@@ -69,6 +68,8 @@ function oik_media_pre_form_field() {
 
 /**
  * Validate a media field
+ *
+ * @TODO Implement validation
  *
  * 
  * @param string $value - the field value
@@ -112,4 +113,64 @@ function oik_media_query_field_types( $field_types ) {
  */
 function oik_media_oik_loaded() {
 	//bw_add_shortcode( "bw_otd", "bw_otd", oik_path( "shortcodes/oik-otd.php", "oik-media" ), false );
-}  
+}
+
+/**
+ * Implement "bw_form_functions" for oik-media
+ * 
+ * @param array $fields
+ * @return array with our form functions
+ *
+ */  
+function oik_media_bw_form_functions( $fields ) {	
+	$fields['I'] = "oik_media_upload_form";
+	$fields['F'] = "oik_media_upload_form";
+	return( $fields );
+}
+
+/**
+ * Implement "bw_validate_functions" for oik-media
+ */
+function oik_media_bw_validate_functions( $fields ) {
+	$fields['I'] = "oik_media_validate_media";
+	$fields['F'] = "oik_media_validate_media";
+	return( $fields );
+}
+
+/**
+ * Display a form to upload a media file
+ * 
+ * We need this for the front end!
+ *
+ * @param string $abbrev - the media type
+ * @param array $fields -  
+ */
+function oik_media_upload_form( $abbrev, $fields ) {
+	//e( "oik-media upload form" );
+	//bw_trace2();
+	//bw_backtrace();
+	oik_require( "includes/oik-media-upload-form.php", "oik-media" );
+	oik_media_lazy_upload_form( $abbrev, $fields );
+}
+
+/** 
+ * Validate media file(s)
+ *
+ * At the end of processing the attachment should have been created
+ * and the value of the attachment's post ID is stored in $_POST['_thumbnail']
+ * 
+ *
+ * @param string $format 'I' or 'F'
+ * @param array $fields - field names
+ * @param array $validated - validation status for fields
+ */
+function oik_media_validate_media( $format, $fields, &$validated ) {
+	//bw_trace2();
+	bw_backtrace();
+	bw_trace2( $_FILES, "_FILES", true, BW_TRACE_DEBUG );
+	if ( !empty( $_FILES ) ) {
+		oik_require( "includes/oik-media-validate-media.php", "oik-media" );
+		oik_media_lazy_validate_media( $format, $fields, $validated );
+	}
+}
+
