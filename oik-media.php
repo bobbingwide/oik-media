@@ -4,7 +4,7 @@ Plugin Name: oik-media
 Depends: oik base plugin, oik fields
 Plugin URI: http://www.oik-plugins.com/oik-plugins/oik-media
 Description: Implements date based field types for oik-fields 
-Version: 0.0.0
+Version: 0.0.1
 Author: bobbingwide
 Author URI: http://www.bobbingwide.com
 License: GPL2
@@ -37,14 +37,11 @@ oik_media_plugin_loaded();
 function oik_media_plugin_loaded() {
 	add_action( "oik_pre_theme_field", "oik_media_pre_theme_field" );
 	add_action( "oik_pre_form_field", "oik_media_pre_form_field" );
-	//add_filter( "bw_field_validation_date", "oik_media_field_validation_date", 10, 3 );
 	add_filter( "oik_query_field_types", "oik_media_query_field_types" );
-	//add_filter( "oik_default_meta_value_date", "oik_media_default_meta_value_date", 10, 2 );
 	add_action( "oik_loaded", "oik_media_oik_loaded" );
 	add_filter( "bw_form_functions", "oik_media_bw_form_functions" );
 	add_filter( "bw_validate_functions", "oik_media_bw_validate_functions" );
 }
-
 
 /**
  * Implements action "oik_pre_theme_field"
@@ -67,36 +64,13 @@ function oik_media_pre_form_field() {
 } 
 
 /**
- * Validate a media field
- *
- * @TODO Implement validation
- *
- * 
- * @param string $value - the field value
- * @param string $field - the field name
- * @param array $data - array of data about the field   
- */
-function oik_media_field_validation_date( $value, $field, $data ) {
-	// bw_trace2();
-	if ( $value ) {
-		$preg_match = preg_match( '!\d{4}-\d{2}-\d{2}!', $value );
-		//$numeric = is_numeric( $value );
-		if ( !$preg_match ) {
-			$text = sprintf( __( "Invalid %s" ), $data['#title'] );     
-		 bw_issue_message( $field, "non_numeric", $text, "error" );
-		}
-	}       
-	return( $value );   
-}
-
-/**
  * Implement "oik_query_field_types" for oik-media
  *
- * Type   | Meaning
- * ------ | -------------------------------------------- 
- * media  | the generic term to represent any attachment
- * file   | subset of attachments which are not images
- * image  | subset of attachments which are images
+ * Type   | Meaning																			 | Note
+ * ------ | -------------------------------------------- | ------ 
+ * media  | the generic term to represent any attachment | 
+ * file   | subset of attachments which are not images   | future use
+ * image  | subset of attachments which are images       | future use
  * 
  */
 function oik_media_query_field_types( $field_types ) {
@@ -106,13 +80,11 @@ function oik_media_query_field_types( $field_types ) {
 	return( $field_types );
 }
 
-
 /**
  * Implement "oik_loaded" action for oik-media
  *
  */
 function oik_media_oik_loaded() {
-	//bw_add_shortcode( "bw_otd", "bw_otd", oik_path( "shortcodes/oik-otd.php", "oik-media" ), false );
 }
 
 /**
@@ -120,7 +92,6 @@ function oik_media_oik_loaded() {
  * 
  * @param array $fields
  * @return array with our form functions
- *
  */  
 function oik_media_bw_form_functions( $fields ) {	
 	$fields['I'] = "oik_media_upload_form";
@@ -130,6 +101,9 @@ function oik_media_bw_form_functions( $fields ) {
 
 /**
  * Implement "bw_validate_functions" for oik-media
+ *
+ * @param array $fields 
+ * @return array with our validation functions
  */
 function oik_media_bw_validate_functions( $fields ) {
 	$fields['I'] = "oik_media_validate_media";
@@ -146,9 +120,6 @@ function oik_media_bw_validate_functions( $fields ) {
  * @param array $fields -  
  */
 function oik_media_upload_form( $abbrev, $fields ) {
-	//e( "oik-media upload form" );
-	//bw_trace2();
-	//bw_backtrace();
 	oik_require( "includes/oik-media-upload-form.php", "oik-media" );
 	oik_media_lazy_upload_form( $abbrev, $fields );
 }
@@ -157,7 +128,8 @@ function oik_media_upload_form( $abbrev, $fields ) {
  * Validate media file(s)
  *
  * At the end of processing the attachment should have been created
- * and the value of the attachment's post ID is stored in $_POST['_thumbnail']
+ * and the value of the attachment's post ID is stored in $_POST['_thumbnail_id'].
+ * Currently we rely on other routines to implement the logic to insert the attachment.
  * 
  *
  * @param string $format 'I' or 'F'

@@ -30,6 +30,8 @@ function oik_media_lazy_validate_media( $format, $fields, &$validated ) {
  * Remember, this is part of the [bw_new] shortcode which is going to insert a post of a particular type.
  * If we're creating an attachment then we won't need to perform this insertion twice.
  * For other post types, then we probably need to attach the attachment to the post, possibly setting it as the featured image.
+ * 
+ * @TODO Decide what to do if no one implements 'oik-media-create-attachment' 
  *
  * @param string $key - the field name for this file (probably 'file' )
  * @param array $file
