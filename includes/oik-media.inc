@@ -34,7 +34,7 @@ function bw_form_field_media( $name, $type, $title, $value, $args ) {
 		//gob();
 	} else {
 	}
-	oik_media_upload_form( $name, $value );
+	//oik_media_upload_form( $name, $value );
 	oik_media_select_form( $name, $value );
 	etag( "td" );
 	etag( "tr" );
@@ -71,17 +71,6 @@ function bw_theme_field_media( $key, $value, $field=null ) {
 }
 }
 
-/**
- * Display a form to upload a media file
- * 
- * We need this for the front end!
-  
- */
-function oik_media_upload_form( $name, $value=null ) {
-	e( "oik-media upload form for $name" );
-	oik_require( "includes/oik-media-upload-form.php", "oik-media" );
-	oik_media_lazy_upload_form( $name, $value );
-}
 
 /**
  * Display a select list to choose the media item
