@@ -4,7 +4,7 @@ Donate link: http://www.oik-plugins.com/oik/oik-donate/
 Tags: shortcodes, smart, lazy
 Requires at least: 4.5.2
 Tested up to: 4.5.2
-Stable tag: 0.0.0
+Stable tag: 0.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,17 +14,12 @@ Implements media related field types for oik-fields.
 
 
 = Field types supported =
-* media     - stored as a post ID - e.g. noderef. Displayed as the image thumbnail or filename if not an image
+* media     - stored as a post ID - e.g. noderef. Displayed as the image thumbnail or filename if not an image.
 
-* file      - 
-
-= Field types planned =
 
 = Shortcodes =
 
-Media fields are displayable using [bw_field], [bw_fields] and other shortcodes that support field display.
-
-
+Media fields are displayable using [bw_field], [bw_fields], [bw_new] and other shortcodes that support field display.
 
 = Action and filter hooks =
 
@@ -37,8 +32,6 @@ Follow this code...
   add_filter( "oik_query_field_types", "oik_media_query_field_types" );
   add_filter( "oik_default_meta_value_date", "oik_media_default_meta_value_date", 10, 2 );
   add_action( "oik_loaded", "oik_media_oik_loaded" );
-
-
 
 
 == Installation ==
@@ -60,20 +53,20 @@ and rather not do it just by using Add Media.
 
 Here are some that provide a field type with a programming interface
 
-WebDevStudios/CMB2 - file, file_list
-elliotcondon/acf - image, media
+- WebDevStudios/CMB2 - file, file_list
+- elliotcondon/acf - image, media
 
-Here are some that use attachments in their usr interface:
+Here are some that use attachments in their user interface:
 
-easydigitaldownloads/easy-digital-downloads - download
-WooCommerce - product images and product gallery?
+- easydigitaldownloads/easy-digital-downloads - download
+- WooCommerce - product images and product gallery?
 
 
 These plugins are directly aimed at supporting media upload:
 
-[Multi Image Upload](https://wordpress.org/plugins/multi-image-upload/)
-[My Upload Images](https://wordpress.org/plugins/my-upload-images/)
-[Frontend Uploader](https://wordpress.org/plugins/frontend-uploader/)
+- [Multi Image Upload](https://wordpress.org/plugins/multi-image-upload/)
+- [My Upload Images](https://wordpress.org/plugins/my-upload-images/)
+- [Frontend Uploader](https://wordpress.org/plugins/frontend-uploader/)
 
 
 = What does it need to make it work? = 
@@ -87,10 +80,20 @@ These plugins are directly aimed at supporting media upload:
 1. oik-media in action
 
 == Upgrade Notice ==
+= 0.0.1 = 
+Required for bigram.co.uk
+
 = 0.0.0 =
 New plugin, available from GitHub.
 
 == Changelog == 
+= 0.0.1 = 
+* Added: Form and validation functions for media [github bobbingwide oik-media issue 1]
+* Added: Develop oik_media_get_file_date() [github bobbingwide oik-media issue 2]
+* Added: Create the attachment as part of the validation
+* Changed: Move oik_media_upload_form to oik-media.php
+* Changed: Write oik_media_lazy_upload_form() to support a single file
+
 = 0.0.0 =
 * Added: New plugin
 
