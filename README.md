@@ -1,10 +1,11 @@
 # oik-media 
+![banner](assets/oik-media-banner-772x250.jpg)
 * Contributors: bobbingwide
-* Donate link: http://www.oik-plugins.com/oik/oik-donate/
+* Donate link: https://www.oik-plugins.com/oik/oik-donate/
 * Tags: shortcodes, smart, lazy
 * Requires at least: 4.5.2
-* Tested up to: 4.5.2
-* Stable tag: 0.0.1
+* Tested up to: 5.9.3
+* Stable tag: 0.1.0
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +81,9 @@ These plugins are directly aimed at supporting media upload:
 1. oik-media in action
 
 ## Upgrade Notice 
+# 0.1.0 
+Update to avoid the Warning message from exit_read_data()
+
 # 0.0.1 
 Required for bigram.co.uk
 
@@ -87,9 +91,16 @@ Required for bigram.co.uk
 New plugin, available from GitHub.
 
 ## Changelog 
+# 0.1.0 
+* Fixed: Avoid warnings from exif_read_data #4
+* Changed: Add support to set/change image orientation
+* Tested: With WordPress 5.9.3 and WordPress Multi Site
+* Tested: With Gutenberg 13.1.0
+* Tested: With PHP 8.0
+
 # 0.0.1 
-* Added: Form and validation functions for media [github bobbingwide oik-media issue 1]
-* Added: Develop oik_media_get_file_date() [github bobbingwide oik-media issue 2]
+* Added: Form and validation functions for media https://github.com/bobbingwide/oik-media/issues/1
+* Added: Develop oik_media_get_file_date() https://github.com/bobbingwide/oik-media/issues/2
 * Added: Create the attachment as part of the validation
 * Changed: Move oik_media_upload_form to oik-media.php
 * Changed: Write oik_media_lazy_upload_form() to support a single file
@@ -99,6 +110,6 @@ New plugin, available from GitHub.
 
 ## Further reading 
 If you want to read more about the oik plugins then please visit the
-[oik plugin](http://www.oik-plugins.com/oik)
+[oik plugin](https://www.oik-plugins.com/oik)
 **"the oik plugin - for often included key-information"**
 
