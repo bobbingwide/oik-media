@@ -1,7 +1,7 @@
 <?php
 /**
  * @package oik-media
- * @copyright (C) Copyright Bobbing Wide 2016, 2022
+ * @copyright (C) Copyright Bobbing Wide 2016, 2022, 2023
  */
 
 /**
@@ -20,8 +20,9 @@ function oik_media_get_file_date( $file ) {
 			$filedatetime = $filedatetimeoriginal;
 		}
 		$file_date = bw_format_date(  $filedatetime, "Y-m-d H:i:s" );
-	} else {	
-		$file_date = bw_format_date( null, "Y-m-d H:i:s" );
+	} else {
+		$filedatetime = oik_media_extract_field( $data, "FileDateTime" );
+		$file_date = bw_format_date( $filedatetime, "Y-m-d H:i:s" );
 	}
 	return( $file_date );
 }
@@ -198,19 +199,4 @@ Array
 
  */
  
-if ( PHP_SAPI == "cli" )  {
 
-/**
- * Tests againsts a selected file
- */ 
-function test( $file ) {
-  $date = oik_media_get_file_date( $file );
-	echo "$date $file" . PHP_EOL;
-}
- 
-//test( "C:/apache/htdocs/oik-plugins/icons/oik-media-icon-256x256.jpg" );
-//test( "C:/apache/htdocs/oik-plugins/banners/oik-media-banner-772x250.jpg" );
-//test( "C:/vinyl/My Pictures/iPad/2016-05-17/IMG_0004.JPG" );
-test( "C:/vinyl/My Pictures/bobbing phone/2sep10/Scottish Breaded.jpg" );
-
-}

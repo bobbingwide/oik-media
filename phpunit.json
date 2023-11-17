@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="4" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.105496">
+    <testsuite name="oik-media" tests="4" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.105496">
+      <testsuite name="Tests_load_libs" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-media\tests\test-a-load-php.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.078785">
+        <testcase name="test_load_includes" class="Tests_load_libs" classname="Tests_load_libs" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-media\tests\test-a-load-php.php" line="25" assertions="1" time="0.068639"/>
+        <testcase name="test_load_plugin" class="Tests_load_libs" classname="Tests_load_libs" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-media\tests\test-a-load-php.php" line="47" assertions="1" time="0.010146"/>
+      </testsuite>
+      <testsuite name="Tests_get_file_date" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-media\tests\test-get-file-date.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.014782">
+        <testcase name="test_get_file_date" class="Tests_get_file_date" classname="Tests_get_file_date" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-media\tests\test-get-file-date.php" line="22" assertions="1" time="0.014782"/>
+      </testsuite>
+      <testsuite name="Tests_oik_media_orientation" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-media\tests\test-oik-media-orientation.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.011929">
+        <testcase name="test_oik_media_orientation" class="Tests_oik_media_orientation" classname="Tests_oik_media_orientation" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-media\tests\test-oik-media-orientation.php" line="22" assertions="1" time="0.011929"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>
