@@ -3,8 +3,8 @@ Contributors: bobbingwide
 Donate link: https://www.oik-plugins.com/oik/oik-donate/
 Tags: shortcodes, smart, lazy
 Requires at least: 4.5.2
-Tested up to: 5.9.3
-Stable tag: 0.1.0
+Tested up to: 6.4.1
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,8 +53,7 @@ and rather not do it just by using Add Media.
 
 Here are some that provide a field type with a programming interface
 
-- WebDevStudios/CMB2 - file, file_list
-- elliotcondon/acf - image, media
+- AdvancedCustomFields/acf - image, media
 
 Here are some that use attachments in their user interface:
 
@@ -80,6 +79,9 @@ These plugins are directly aimed at supporting media upload:
 1. oik-media in action
 
 == Upgrade Notice ==
+= 0.1.1 =
+Update for support for PHP 8.1 and PHP 8.2 
+
 = 0.1.0 =
 Update to avoid the Warning message from exit_read_data()
 
@@ -90,6 +92,13 @@ Required for bigram.co.uk
 New plugin, available from GitHub.
 
 == Changelog == 
+= 0.1.1 =
+* Changed: Add PHPUnit tests for PHP 8.1 and PHP 8.2 #6
+* Tested: With WordPress 6.4.1 and WordPress Multisite
+* Tested: With Gutenberg 17.0.2
+* Tested: With PHP 8.1 and PHP 8.2
+* Tested: With PHPUnit 9.6
+
 = 0.1.0 = 
 * Fixed: Avoid warnings from exif_read_data #4
 * Changed: Add support to set/change image orientation
